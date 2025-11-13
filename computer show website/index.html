@@ -1262,7 +1262,20 @@
 
         
         <script>
-            document.querySelectorAll('.product-gallery').forEach(gallery => {
+            // Filter buttons
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.category').forEach(c => c.classList.remove('active'));
+                
+                e.target.classList.add('active');
+                const category = e.target.getAttribute('data-category');
+                document.getElementById(category).classList.add('active');
+            });
+        });
+
+        // Product gallery slides
+        document.querySelectorAll('.product-gallery').forEach(gallery => {
             const slides = gallery.querySelector('.slides');
             const images = slides.querySelectorAll('img');
             const prevBtn = gallery.querySelector('.prev');
@@ -1276,9 +1289,6 @@
 
             prevBtn.addEventListener('click', () => showSlide(index - 1));
             nextBtn.addEventListener('click', () => showSlide(index + 1));
-
-            // Optional: auto-slide every 4 seconds
-            setInterval(() => showSlide(index + 1), 4000);
         });
         </script>
 
