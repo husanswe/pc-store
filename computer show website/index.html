@@ -137,7 +137,7 @@
             margin-bottom: 40px;
         }
 
-        #products .sub-nav a {
+        #products .sub-nav button {
             text-decoration: none;
             color: #333;
             background-color: #e9ecef;
@@ -145,11 +145,13 @@
             border-radius: 5px;
             font-size: 1em;
             transition: background-color 0.3s, color 0.3s;
-            
+            cursor: pointer;
         }
         
-        #products .sub-nav a:hover>:not(:hover){
-            filter: blur(1px);
+        #products .sub-nav button:hover,
+        #products .sub-nav button.active {
+            background-color: #3a3a3a;
+            color: white;
         }
 
         #products .sub-nav a:hover,
