@@ -1,0 +1,52 @@
+.top-header {
+    /* Set the background image and path */
+    background-image: url(cyber.jpg);
+    
+    /* Other properties to style the image */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 300px; /* Or another height, as needed */
+    width: 100%;
+}
+.product-gallery {
+  position: relative;
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.product-gallery .slides {
+  display: flex;
+  transition: transform 0.4s ease;
+  width: 100%;
+  border-image: fill;
+}
+
+.product-gallery img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.product-gallery button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.4);
+  color: white;
+  border: none;
+  font-size: 20px;
+  padding: 4px 8px;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.product-gallery .prev { left: 8px; }
+.product-gallery .next { right: 8px; }
+
+.product-gallery button:hover {
+  background: rgba(0,0,0,0.7);
+}
