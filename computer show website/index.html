@@ -1,1283 +1,1286 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TechHub Computer Shop</title>
-    <link rel="stylesheet" href="prototype.css">
-    <style>
-        /* Reset and Basic Styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Arial, sans-serif;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            background-image: url(background.gif);
-            background-size: 2000px;
-            background-position: center;
-            background-color: #f0f2f5;
-            color: #333;
-            line-height: 1.6;
-        }
-
-        header {
-            background: linear-gradient(to right, #535353, #617277);
-            color: white;
-            padding: 20px 0;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        header h1 {
-            text-align: center;
-            font-size: 2.5em;
-            margin-bottom: 10px;
-        }
-
-        nav {
-            text-align: center;
-        }
-
-        nav ul {
-            list-style: none;
-            display: flex;
-            justify-content: center;
-            gap: 25px;
-        }
-
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-            font-size: 1.1em;
-            padding: 10px 20px;
-            border-radius: 5px;
-            transition: background-color 0.3s, transform 0.3s;
-        }
-
-        nav ul li a:hover {
-            background-color: #989b9e;
-            transform: scale(1.1);
-        }
-
-        nav ul li a.active {
-            background-color: #989b9e;
-            font-weight: bold;
-        }
-
-        section {  
-            padding: 80px 20px;
-            min-height: 500px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        section h2 {
-            text-align: center;
-            font-size: 2.5em;
-            color: #b3b3b3;
-            margin-bottom: 30px;
-        }
-
-        /* Home Section */
-        #home {
-            background: linear-gradient(to bottom, #6b6c6d, #ffffff);
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            height: 400px;
-            width: 100%;
-            color: white;
-            text-align: center;
-        }
-        #home p {
-            font-size: 1.3em;
-            max-width: 700px;
-            margin: 20px auto;
-        }
-
-        #home .cta-button {
-            display: inline-block;
-            padding: 15px 30px;
-            background-color: #585858;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            margin-top: 20px;
-            transition: background-color 0.3s;
-        }
-
-        #home .cta-button:hover {
-            background-color: #494b4a;
-        }
-
-        /* Products Section */
-        #products {
-            padding-top: 120px; /* Extra padding to account for fixed header */
-            padding: 15px;
-        }
-
-        #products .sub-nav {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-bottom: 40px;
-        }
-
-        #products .sub-nav button {
-            text-decoration: none;
-            color: #333;
-            background-color: #e9ecef;
-            padding: 10px 20px;
-            border-radius: 5px;
-            font-size: 1em;
-            transition: background-color 0.3s, color 0.3s;
-            cursor: pointer;
-        }
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>TechHub Computer Shop</title>
+        <link rel="stylesheet" href="prototype.css">
         
-        #products .sub-nav button:hover,
-        #products .sub-nav button.active {
-            background-color: #3a3a3a;
-            color: white;
-        }
+        <style>
+            /* Reset and Basic Styles */
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: 'Segoe UI', Arial, sans-serif;
+            }
 
-        #products .category {
-            display: none; /* Hide all categories by default */
-        }
+            html {
+                scroll-behavior: smooth;
+            }
 
-        #products .category.active {
-            display: block;
-        }
+            body {
+                background-image: url(background.gif);
+                background-size: 2000px;
+                background-position: center;
+                background-color: #f0f2f5;
+                color: #333;
+                line-height: 1.6;
+            }
 
-        #products .product-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
+            header {
+                background: linear-gradient(to right, #535353, #617277);
+                color: white;
+                padding: 20px 0;
+                position: fixed;
+                width: 100%;
+                top: 0;
+                z-index: 1000;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            }
 
-        #products .product-card {
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            text-align: center;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
+            header h1 {
+                text-align: center;
+                font-size: 2.5em;
+                margin-bottom: 10px;
+            }
 
-        #products .product-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-        }
+            nav {
+                text-align: center;
+            }
 
-        #products .product-card img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 10px;
-            margin-bottom: 15px;
-        }
-
-        #products .product-card h3 {
-            margin-bottom: 10px;
-            color: #949494;
-        }
-
-        #products .product-card p {
-            font-size: 1.2em;
-            color: #28a745;
-            font-weight: bold;
-        }
-
-        #services .service-list {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 25px;
-        }
-
-        #services .service {
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            padding: 25px;
-            width: 300px;
-            height: 300px;
-            text-align: center;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        #services .service:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-        }
-
-        #services .service h3 {
-            margin-bottom: 15px;
-            color: #888888;
-        }
-
-        #about {
-            background-color: white;
-            border-radius: 15px;
-            padding: 40px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        #about p {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-            font-size: 1.1em;
-        }
-
-        #contact {
-            background-color: white;
-            border-radius: 15px;
-            padding: 40px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        #contact form {
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        #contact label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-            color: #b4b4b4;
-        }
-
-        #contact input, #contact textarea {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 20px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 1em;
-        }
-
-        #contact button {
-            background-color: #363636;
-            color: white;
-            padding: 12px 30px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1.1em;
-            transition: background-color 0.3s;
-        }
-
-        #contact button:hover {
-            background-color: #58595a;
-        }
-
-        footer {
-            background: linear-gradient(to right, #3d3d3d, #d8d8d8);
-            color: white;
-            text-align: center;
-            padding: 20px;
-            margin-top: 40px;
-        }
-
-        .product-gallery {
-            position: relative;
-            overflow: hidden;
-            border-radius: 10px;
-            margin-bottom: 15px;
-        }
-
-        .slides {
-            display: flex;
-            transition: transform 0.5s ease;
-        }
-
-        .slides img {
-            width: 100%;
-            flex-shrink: 0;
-        }
-
-        .prev, .next {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(0, 0, 0, 0.5);
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            cursor: pointer;
-            border-radius: 3px;
-            transition: background 0.3s;
-        }
-
-        .prev:hover, .next:hover {
-            background: rgba(0, 0, 0, 0.8);
-        }
-
-        .prev {
-            left: 10px;
-        }
-
-        .next {
-            right: 10px;
-        }
-
-        @media (max-width: 768px) {
             nav ul {
+                list-style: none;
+                display: flex;
+                justify-content: center;
+                gap: 25px;
+            }
+
+            nav ul li a {
+                color: white;
+                text-decoration: none;
+                font-size: 1.1em;
+                padding: 10px 20px;
+                border-radius: 5px;
+                transition: background-color 0.3s, transform 0.3s;
+            }
+
+            nav ul li a:hover {
+                background-color: #989b9e;
+                transform: scale(1.1);
+            }
+
+            nav ul li a.active {
+                background-color: #989b9e;
+                font-weight: bold;
+            }
+
+            section {  
+                padding: 80px 20px;
+                min-height: 500px;
+                display: flex;
                 flex-direction: column;
-                gap: 10px;
+                justify-content: center;
+                max-width: 1200px;
+                margin: 0 auto;
+            }
+
+            section h2 {
+                text-align: center;
+                font-size: 2.5em;
+                color: #b3b3b3;
+                margin-bottom: 30px;
+            }
+
+            /* Home Section */
+            #home {
+                background: linear-gradient(to bottom, #6b6c6d, #ffffff);
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                height: 400px;
+                width: 100%;
+                color: white;
+                text-align: center;
+            }
+            #home p {
+                font-size: 1.3em;
+                max-width: 700px;
+                margin: 20px auto;
+            }
+
+            #home .cta-button {
+                display: inline-block;
+                padding: 15px 30px;
+                background-color: #585858;
+                color: white;
+                text-decoration: none;
+                border-radius: 5px;
+                margin-top: 20px;
+                transition: background-color 0.3s;
+            }
+
+            #home .cta-button:hover {
+                background-color: #494b4a;
+            }
+
+            /* Products Section */
+            #products {
+                padding-top: 120px; /* Extra padding to account for fixed header */
+                padding: 15px;
             }
 
             #products .sub-nav {
-                flex-direction: column;
-                align-items: center;
+                display: flex;
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 15px;
+                margin-bottom: 40px;
             }
 
-            section {
-                padding: 60px 15px;
+            #products .sub-nav button {
+                text-decoration: none;
+                color: #333;
+                background-color: #e9ecef;
+                padding: 10px 20px;
+                border-radius: 5px;
+                font-size: 1em;
+                transition: background-color 0.3s, color 0.3s;
+                cursor: pointer;
+            }
+            
+            #products .sub-nav button:hover,
+            #products .sub-nav button.active {
+                background-color: #3a3a3a;
+                color: white;
             }
 
-            #products .product-grid, #services .service-list {
-                grid-template-columns: 1fr;
+            #products .category {
+                display: none; /* Hide all categories by default */
             }
-        }
-    </style>
-</head>
-<body>
-    <header>
-        <h1>TechHub Computer Shop</h1>
-        <nav>
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#products">Products</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#about">About Us</a></li>
-                <li><a href="#contact">Contact Us</a></li> 
-            </ul>
-        </nav>
-    </header>
 
-    <section id="home">
-        <h2>Welcome to TechHub</h2>
-        <p>Your ultimate destination for cutting-edge computers, accessories, and top-notch services. Explore our wide range of products and let us power your tech journey!</p>
-        <a href="#products" class="cta-button">Shop Now</a>
-    </section>
+            #products .category.active {
+                display: block;
+            }
 
-    <section id="products">
-        <h2>Our Products</h2>
-        <div class="sub-nav">
-            <button class="filter-btn active" data-category="laptops">Laptops</button>
-            <button class="filter-btn" data-category="desktops">Desktops</button>
-            <button class="filter-btn" data-category="keyboards">Keyboards</button>
-            <button class="filter-btn" data-category="mice">Mouse</button>
-            <button class="filter-btn" data-category="monitors">Monitors</button>
-            <button class="filter-btn" data-category="rams">RAM</button>
-            <button class="filter-btn" data-category="cpu">CPU</button>
-            <button class="filter-btn" data-category="storage">Storage</button>
-            <button hclass="filter-btn" data-category="motherboard">Motherboards</button>
-        </div>
+            #products .product-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 30px;
+            }
 
-        <div id="laptops" class="category active">
+            #products .product-card {
+                background: white;
+                border-radius: 15px;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+                padding: 20px;
+                text-align: center;
+                transition: transform 0.3s, box-shadow 0.3s;
+            }
 
-            <div class="product-grid">
-                <div class="product-card">
-                    <div class="product-gallery">
-                        <div class="slides">
-                            <img src="h732.png" alt="Laptop front">
-                            <img src="laptop_2-removebg-preview (1).png" alt="Laptop side">
-                            <img src="laptop_2-removebg-preview.png" alt="Laptop back">
-                        </div>
-                        <button class="prev">&#10094;</button>
-                        <button class="next">&#10095;</button>
-                    </div>
-                    <h3>High-Performance Laptop</h3>
-                    <p>$999</p>
-                </div>
+            #products .product-card:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            }
 
-                <div class="product-card">
-                    <div class="product-gallery">
-                        <div class="slides">
-                            <img src="h732.png" alt="Laptop front">
-                            <img src="laptop_2-removebg-preview (1).png" alt="Laptop side">
-                            <img src="laptop_2-removebg-preview.png" alt="Laptop back">
-                        </div>
-                        <button class="prev">&#10094;</button>
-                        <button class="next">&#10095;</button>
-                    </div>
-                    <h3>Ultralight Ultrabook</h3>
-                    <p>$1299</p>
-                </div>
+            #products .product-card img {
+                width: 100%;
+                height: 200px;
+                object-fit: cover;
+                border-radius: 10px;
+                margin-bottom: 15px;
+            }
 
-                <div class="product-card">
-                    <div class="product-gallery">
-                        <div class="slides">
-                            <img src="h732.png" alt="Laptop front">
-                            <img src="laptop_2-removebg-preview (1).png" alt="Laptop side">
-                            <img src="laptop_2-removebg-preview.png" alt="Laptop back">
-                        </div>
-                        <button class="prev">&#10094;</button>
-                        <button class="next">&#10095;</button>
-                    </div>
-                    <h3>Ultralight Ultrabook</h3>
-                    <p>$1299</p>
-                </div>
+            #products .product-card h3 {
+                margin-bottom: 10px;
+                color: #949494;
+            }
 
-                <div class="product-card">
-                    <div class="product-gallery">
-                        <div class="slides">
-                            <img src="h732.png" alt="Laptop front">
-                            <img src="laptop_2-removebg-preview (1).png" alt="Laptop side">
-                            <img src="laptop_2-removebg-preview.png" alt="Laptop back">
-                        </div>
-                        <button class="prev">&#10094;</button>
-                        <button class="next">&#10095;</button>
-                    </div>
-                    <h3>Ultralight Ultrabook</h3>
-                    <p>$1299</p>
-                </div>
+            #products .product-card p {
+                font-size: 1.2em;
+                color: #28a745;
+                font-weight: bold;
+            }
 
-                <div class="product-card">
-                    <div class="product-gallery">
-                        <div class="slides">
-                            <img src="h732.png" alt="Laptop front">
-                            <img src="laptop_2-removebg-preview (1).png" alt="Laptop side">
-                            <img src="laptop_2-removebg-preview.png" alt="Laptop back">
-                        </div>
-                        <button class="prev">&#10094;</button>
-                        <button class="next">&#10095;</button>
-                    </div>
-                    <h3>Ultralight Ultrabook</h3>
-                    <p>$1299</p>
-                </div>
+            #services .service-list {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 25px;
+            }
 
-                <div class="product-card">
-                    <div class="product-gallery">
-                        <div class="slides">
-                            <img src="h732.png" alt="Laptop front">
-                            <img src="laptop_2-removebg-preview (1).png" alt="Laptop side">
-                            <img src="laptop_2-removebg-preview.png" alt="Laptop back">
-                        </div>
-                        <button class="prev">&#10094;</button>
-                        <button class="next">&#10095;</button>
-                    </div>
-                    <h3>Ultralight Ultrabook</h3>
-                    <p>$1299</p>
-                </div>
+            #services .service {
+                background: white;
+                border-radius: 15px;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+                padding: 25px;
+                width: 300px;
+                height: 300px;
+                text-align: center;
+                transition: transform 0.3s, box-shadow 0.3s;
+            }
 
+            #services .service:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            }
+
+            #services .service h3 {
+                margin-bottom: 15px;
+                color: #888888;
+            }
+
+            #about {
+                background-color: white;
+                border-radius: 15px;
+                padding: 40px;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            }
+
+            #about p {
+                max-width: 800px;
+                margin: 0 auto;
+                text-align: center;
+                font-size: 1.1em;
+            }
+
+            #contact {
+                background-color: white;
+                border-radius: 15px;
+                padding: 40px;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            }
+
+            #contact form {
+                max-width: 600px;
+                margin: 0 auto;
+            }
+
+            #contact label {
+                display: block;
+                margin-bottom: 5px;
+                font-weight: bold;
+                color: #b4b4b4;
+            }
+
+            #contact input, #contact textarea {
+                width: 100%;
+                padding: 12px;
+                margin-bottom: 20px;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                font-size: 1em;
+            }
+
+            #contact button {
+                background-color: #363636;
+                color: white;
+                padding: 12px 30px;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                font-size: 1.1em;
+                transition: background-color 0.3s;
+            }
+
+            #contact button:hover {
+                background-color: #58595a;
+            }
+
+            footer {
+                background: linear-gradient(to right, #3d3d3d, #d8d8d8);
+                color: white;
+                text-align: center;
+                padding: 20px;
+                margin-top: 40px;
+            }
+
+            .product-gallery {
+                position: relative;
+                overflow: hidden;
+                border-radius: 10px;
+                margin-bottom: 15px;
+            }
+
+            .slides {
+                display: flex;
+                transition: transform 0.5s ease;
+            }
+
+            .slides img {
+                width: 100%;
+                flex-shrink: 0;
+            }
+
+            .prev, .next {
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                background: rgba(0, 0, 0, 0.5);
+                color: white;
+                border: none;
+                padding: 10px 15px;
+                cursor: pointer;
+                border-radius: 3px;
+                transition: background 0.3s;
+            }
+
+            .prev:hover, .next:hover {
+                background: rgba(0, 0, 0, 0.8);
+            }
+
+            .prev {
+                left: 10px;
+            }
+
+            .next {
+                right: 10px;
+            }
+
+            @media (max-width: 768px) {
+                nav ul {
+                    flex-direction: column;
+                    gap: 10px;
+                }
+
+                #products .sub-nav {
+                    flex-direction: column;
+                    align-items: center;
+                }
+
+                section {
+                    padding: 60px 15px;
+                }
+
+                #products .product-grid, #services .service-list {
+                    grid-template-columns: 1fr;
+                }
+            }
+        </style>
+    </head>
+
+    <body>
+        
+        <header>
+            <h1>TechHub Computer Shop</h1>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#products">Products</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#contact">Contact Us</a></li> 
+                </ul>
+            </nav>
+        </header>
+
+        <section id="home">
+            <h2>Welcome to TechHub</h2>
+            <p>Your ultimate destination for cutting-edge computers, accessories, and top-notch services. Explore our wide range of products and let us power your tech journey!</p>
+            <a href="#products" class="cta-button">Shop Now</a>
+        </section>
+
+        <section id="products">
+            <h2>Our Products</h2>
+            <div class="sub-nav">
+                <button class="filter-btn active" data-category="laptops">Laptops</button>
+                <button class="filter-btn" data-category="desktops">Desktops</button>
+                <button class="filter-btn" data-category="keyboards">Keyboards</button>
+                <button class="filter-btn" data-category="mice">Mouse</button>
+                <button class="filter-btn" data-category="monitors">Monitors</button>
+                <button class="filter-btn" data-category="rams">RAM</button>
+                <button class="filter-btn" data-category="cpu">CPU</button>
+                <button class="filter-btn" data-category="storage">Storage</button>
+                <button hclass="filter-btn" data-category="motherboard">Motherboards</button>
             </div>
-        </div>
 
-        <div id="desktops" class="category">
-            <div class="product-grid">
+            <div id="laptops" class="category active">
 
-                <div class="product-card">
-                    <div class="product-gallery">
-                        <div class="slides">
-                            <img src="Desktop_PC-removebg-preview.png" alt="Laptop front">
-                            <img src="Desktop_PC-removebg-preview.png" alt="Laptop side">
-                            <img src="Desktop_PC-removebg-preview.png" alt="Laptop back">
+                <div class="product-grid">
+                    <div class="product-card">
+                        <div class="product-gallery">
+                            <div class="slides">
+                                <img src="h732.png" alt="Laptop front">
+                                <img src="laptop_2-removebg-preview (1).png" alt="Laptop side">
+                                <img src="laptop_2-removebg-preview.png" alt="Laptop back">
+                            </div>
+                            <button class="prev">&#10094;</button>
+                            <button class="next">&#10095;</button>
                         </div>
-                        <button class="prev">&#10094;</button>
-                        <button class="next">&#10095;</button>
+                        <h3>High-Performance Laptop</h3>
+                        <p>$999</p>
                     </div>
-                    <h3>Gaming Desktop</h3>
-                    <p>$1499</p>
-                </div>
 
-                <div class="product-card">
-                    <div class="product-gallery">
-                        <div class="slides">
-                            <img src="Desktop_PC-removebg-preview.png" alt="Laptop front">
-                            <img src="Desktop_PC-removebg-preview.png" alt="Laptop side">
-                            <img src="Desktop_PC-removebg-preview.png" alt="Laptop back">
+                    <div class="product-card">
+                        <div class="product-gallery">
+                            <div class="slides">
+                                <img src="h732.png" alt="Laptop front">
+                                <img src="laptop_2-removebg-preview (1).png" alt="Laptop side">
+                                <img src="laptop_2-removebg-preview.png" alt="Laptop back">
+                            </div>
+                            <button class="prev">&#10094;</button>
+                            <button class="next">&#10095;</button>
                         </div>
-                        <button class="prev">&#10094;</button>
-                        <button class="next">&#10095;</button>
+                        <h3>Ultralight Ultrabook</h3>
+                        <p>$1299</p>
                     </div>
-                    <h3>Workstation PC</h3>
-                    <p>$1999</p>
-                </div>
 
-                <div class="product-card">
-                    <div class="product-gallery">
-                        <div class="slides">
-                            <img src="Desktop_PC-removebg-preview.png" alt="Laptop front">
-                            <img src="Desktop_PC-removebg-preview.png" alt="Laptop side">
-                            <img src="Desktop_PC-removebg-preview.png" alt="Laptop back">
+                    <div class="product-card">
+                        <div class="product-gallery">
+                            <div class="slides">
+                                <img src="h732.png" alt="Laptop front">
+                                <img src="laptop_2-removebg-preview (1).png" alt="Laptop side">
+                                <img src="laptop_2-removebg-preview.png" alt="Laptop back">
+                            </div>
+                            <button class="prev">&#10094;</button>
+                            <button class="next">&#10095;</button>
                         </div>
-                        <button class="prev">&#10094;</button>
-                        <button class="next">&#10095;</button>
+                        <h3>Ultralight Ultrabook</h3>
+                        <p>$1299</p>
                     </div>
-                    <h3>Workstation PC</h3>
-                    <p>$1999</p>
-                </div>
 
-                <div class="product-card">
-                    <div class="product-gallery">
-                        <div class="slides">
-                            <img src="Desktop_PC-removebg-preview.png" alt="Laptop front">
-                            <img src="Desktop_PC-removebg-preview.png" alt="Laptop side">
-                            <img src="Desktop_PC-removebg-preview.png" alt="Laptop back">
+                    <div class="product-card">
+                        <div class="product-gallery">
+                            <div class="slides">
+                                <img src="h732.png" alt="Laptop front">
+                                <img src="laptop_2-removebg-preview (1).png" alt="Laptop side">
+                                <img src="laptop_2-removebg-preview.png" alt="Laptop back">
+                            </div>
+                            <button class="prev">&#10094;</button>
+                            <button class="next">&#10095;</button>
                         </div>
-                        <button class="prev">&#10094;</button>
-                        <button class="next">&#10095;</button>
+                        <h3>Ultralight Ultrabook</h3>
+                        <p>$1299</p>
                     </div>
-                    <h3>Workstation PC</h3>
-                    <p>$1999</p>
-                </div>
 
-                <div class="product-card">
-                    <div class="product-gallery">
-                        <div class="slides">
-                            <img src="Desktop_PC-removebg-preview.png" alt="Laptop front">
-                            <img src="Desktop_PC-removebg-preview.png" alt="Laptop side">
-                            <img src="Desktop_PC-removebg-preview.png" alt="Laptop back">
+                    <div class="product-card">
+                        <div class="product-gallery">
+                            <div class="slides">
+                                <img src="h732.png" alt="Laptop front">
+                                <img src="laptop_2-removebg-preview (1).png" alt="Laptop side">
+                                <img src="laptop_2-removebg-preview.png" alt="Laptop back">
+                            </div>
+                            <button class="prev">&#10094;</button>
+                            <button class="next">&#10095;</button>
                         </div>
-                        <button class="prev">&#10094;</button>
-                        <button class="next">&#10095;</button>
+                        <h3>Ultralight Ultrabook</h3>
+                        <p>$1299</p>
                     </div>
-                    <h3>Workstation PC</h3>
-                    <p>$1999</p>
-                </div>
 
-                <div class="product-card">
-                    <div class="product-gallery">
-                        <div class="slides">
-                            <img src="Desktop_PC-removebg-preview.png" alt="Laptop front">
-                            <img src="Desktop_PC-removebg-preview.png" alt="Laptop side">
-                            <img src="Desktop_PC-removebg-preview.png" alt="Laptop back">
+                    <div class="product-card">
+                        <div class="product-gallery">
+                            <div class="slides">
+                                <img src="h732.png" alt="Laptop front">
+                                <img src="laptop_2-removebg-preview (1).png" alt="Laptop side">
+                                <img src="laptop_2-removebg-preview.png" alt="Laptop back">
+                            </div>
+                            <button class="prev">&#10094;</button>
+                            <button class="next">&#10095;</button>
                         </div>
-                        <button class="prev">&#10094;</button>
-                        <button class="next">&#10095;</button>
+                        <h3>Ultralight Ultrabook</h3>
+                        <p>$1299</p>
                     </div>
-                    <h3>Workstation PC</h3>
-                    <p>$1999</p>
-                </div>
 
+                </div>
             </div>
-        </div>
 
+            <div id="desktops" class="category">
+                <div class="product-grid">
 
-        <div id="keyboards" class="category">
-            <div class="product-grid">
-
-                <div class="product-card">
-                    <div class="product-gallery">
-                        <div class="slides">
-                            <img src="keyboard-removebg-preview.png" alt="Laptop front">
-                            <img src="keyboard-removebg-preview.png" alt="Laptop side">
-                            <img src="keyboard-removebg-preview.png" alt="Laptop back">
+                    <div class="product-card">
+                        <div class="product-gallery">
+                            <div class="slides">
+                                <img src="Desktop_PC-removebg-preview.png" alt="Laptop front">
+                                <img src="Desktop_PC-removebg-preview.png" alt="Laptop side">
+                                <img src="Desktop_PC-removebg-preview.png" alt="Laptop back">
+                            </div>
+                            <button class="prev">&#10094;</button>
+                            <button class="next">&#10095;</button>
                         </div>
-                        <button class="prev">&#10094;</button>
-                        <button class="next">&#10095;</button>
+                        <h3>Gaming Desktop</h3>
+                        <p>$1499</p>
                     </div>
-                    <h3>Mechanical Keyboard</h3>
-                    <p>$89</p>
-                </div>
 
-                <div class="product-card">
-                    <div class="product-gallery">
-                        <div class="slides">
-                            <img src="keyboard-removebg-preview.png" alt="Laptop front">
-                            <img src="keyboard-removebg-preview.png" alt="Laptop side">
-                            <img src="keyboard-removebg-preview.png" alt="Laptop back">
+                    <div class="product-card">
+                        <div class="product-gallery">
+                            <div class="slides">
+                                <img src="Desktop_PC-removebg-preview.png" alt="Laptop front">
+                                <img src="Desktop_PC-removebg-preview.png" alt="Laptop side">
+                                <img src="Desktop_PC-removebg-preview.png" alt="Laptop back">
+                            </div>
+                            <button class="prev">&#10094;</button>
+                            <button class="next">&#10095;</button>
                         </div>
-                        <button class="prev">&#10094;</button>
-                        <button class="next">&#10095;</button>
+                        <h3>Workstation PC</h3>
+                        <p>$1999</p>
                     </div>
-                    <h3>RGB Keyboard</h3>
-                    <p>$129</p>
-                </div>
 
-                <div class="product-card">
-                    <div class="product-gallery">
-                        <div class="slides">
-                            <img src="keyboard-removebg-preview.png" alt="Laptop front">
-                            <img src="keyboard-removebg-preview.png" alt="Laptop side">
-                            <img src="keyboard-removebg-preview.png" alt="Laptop back">
+                    <div class="product-card">
+                        <div class="product-gallery">
+                            <div class="slides">
+                                <img src="Desktop_PC-removebg-preview.png" alt="Laptop front">
+                                <img src="Desktop_PC-removebg-preview.png" alt="Laptop side">
+                                <img src="Desktop_PC-removebg-preview.png" alt="Laptop back">
+                            </div>
+                            <button class="prev">&#10094;</button>
+                            <button class="next">&#10095;</button>
                         </div>
-                        <button class="prev">&#10094;</button>
-                        <button class="next">&#10095;</button>
+                        <h3>Workstation PC</h3>
+                        <p>$1999</p>
                     </div>
-                    <h3>RGB Keyboard</h3>
-                    <p>$129</p>
-                </div>
 
-                <div class="product-card">
-                    <div class="product-gallery">
-                        <div class="slides">
-                            <img src="keyboard-removebg-preview.png" alt="Laptop front">
-                            <img src="keyboard-removebg-preview.png" alt="Laptop side">
-                            <img src="keyboard-removebg-preview.png" alt="Laptop back">
+                    <div class="product-card">
+                        <div class="product-gallery">
+                            <div class="slides">
+                                <img src="Desktop_PC-removebg-preview.png" alt="Laptop front">
+                                <img src="Desktop_PC-removebg-preview.png" alt="Laptop side">
+                                <img src="Desktop_PC-removebg-preview.png" alt="Laptop back">
+                            </div>
+                            <button class="prev">&#10094;</button>
+                            <button class="next">&#10095;</button>
                         </div>
-                        <button class="prev">&#10094;</button>
-                        <button class="next">&#10095;</button>
+                        <h3>Workstation PC</h3>
+                        <p>$1999</p>
                     </div>
-                    <h3>RGB Keyboard</h3>
-                    <p>$129</p>
-                </div>
-                
-                <div class="product-card">
-                    <div class="product-gallery">
-                        <div class="slides">
-                            <img src="keyboard-removebg-preview.png" alt="Laptop front">
-                            <img src="keyboard-removebg-preview.png" alt="Laptop side">
-                            <img src="keyboard-removebg-preview.png" alt="Laptop back">
-                        </div>
-                        <button class="prev">&#10094;</button>
-                        <button class="next">&#10095;</button>
-                    </div>
-                    <h3>RGB Keyboard</h3>
-                    <p>$129</p>
-                </div>
 
-                <div class="product-card">
-                    <div class="product-gallery">
-                        <div class="slides">
-                            <img src="keyboard-removebg-preview.png" alt="Laptop front">
-                            <img src="keyboard-removebg-preview.png" alt="Laptop side">
-                            <img src="keyboard-removebg-preview.png" alt="Laptop back">
+                    <div class="product-card">
+                        <div class="product-gallery">
+                            <div class="slides">
+                                <img src="Desktop_PC-removebg-preview.png" alt="Laptop front">
+                                <img src="Desktop_PC-removebg-preview.png" alt="Laptop side">
+                                <img src="Desktop_PC-removebg-preview.png" alt="Laptop back">
+                            </div>
+                            <button class="prev">&#10094;</button>
+                            <button class="next">&#10095;</button>
                         </div>
-                        <button class="prev">&#10094;</button>
-                        <button class="next">&#10095;</button>
+                        <h3>Workstation PC</h3>
+                        <p>$1999</p>
                     </div>
-                    <h3>RGB Keyboard</h3>
-                    <p>$129</p>
-                </div>
 
+                    <div class="product-card">
+                        <div class="product-gallery">
+                            <div class="slides">
+                                <img src="Desktop_PC-removebg-preview.png" alt="Laptop front">
+                                <img src="Desktop_PC-removebg-preview.png" alt="Laptop side">
+                                <img src="Desktop_PC-removebg-preview.png" alt="Laptop back">
+                            </div>
+                            <button class="prev">&#10094;</button>
+                            <button class="next">&#10095;</button>
+                        </div>
+                        <h3>Workstation PC</h3>
+                        <p>$1999</p>
+                    </div>
+
+                </div>
             </div>
-        </div>
 
 
-        <div id="mice" class="category">
-            <div class="product-grid">
+            <div id="keyboards" class="category">
+                <div class="product-grid">
 
-                <div class="product-card">
-                    <div class="product-gallery">
-                        <div class="slides">
-                            <img src="mouse side.jpg" alt="Laptop front">
-                            <img src="mouse top.png" alt="Laptop side">
-                            <img src="mouse side.jpg" alt="Laptop back">
+                    <div class="product-card">
+                        <div class="product-gallery">
+                            <div class="slides">
+                                <img src="keyboard-removebg-preview.png" alt="Laptop front">
+                                <img src="keyboard-removebg-preview.png" alt="Laptop side">
+                                <img src="keyboard-removebg-preview.png" alt="Laptop back">
+                            </div>
+                            <button class="prev">&#10094;</button>
+                            <button class="next">&#10095;</button>
                         </div>
-                        <button class="prev">&#10094;</button>
-                        <button class="next">&#10095;</button>
+                        <h3>Mechanical Keyboard</h3>
+                        <p>$89</p>
                     </div>
-                    <h3>Wireless Mouse</h3>
-                    <p>$49</p>
-                </div>
 
-                <div class="product-card">
-                    <div class="product-gallery">
-                        <div class="slides">
-                            <img src="mouse side.jpg" alt="Laptop front">
-                            <img src="mouse top.png" alt="Laptop side">
-                            <img src="mouse side.jpg" alt="Laptop back">
+                    <div class="product-card">
+                        <div class="product-gallery">
+                            <div class="slides">
+                                <img src="keyboard-removebg-preview.png" alt="Laptop front">
+                                <img src="keyboard-removebg-preview.png" alt="Laptop side">
+                                <img src="keyboard-removebg-preview.png" alt="Laptop back">
+                            </div>
+                            <button class="prev">&#10094;</button>
+                            <button class="next">&#10095;</button>
                         </div>
-                        <button class="prev">&#10094;</button>
-                        <button class="next">&#10095;</button>
+                        <h3>RGB Keyboard</h3>
+                        <p>$129</p>
                     </div>
-                    <h3>Gaming Mouse</h3>
-                    <p>$79</p>
-                </div>
 
-                <div class="product-card">
-                    <div class="product-gallery">
-                        <div class="slides">
-                            <img src="mouse side.jpg" alt="Laptop front">
-                            <img src="mouse top.png" alt="Laptop side">
-                            <img src="mouse side.jpg" alt="Laptop back">
+                    <div class="product-card">
+                        <div class="product-gallery">
+                            <div class="slides">
+                                <img src="keyboard-removebg-preview.png" alt="Laptop front">
+                                <img src="keyboard-removebg-preview.png" alt="Laptop side">
+                                <img src="keyboard-removebg-preview.png" alt="Laptop back">
+                            </div>
+                            <button class="prev">&#10094;</button>
+                            <button class="next">&#10095;</button>
                         </div>
-                        <button class="prev">&#10094;</button>
-                        <button class="next">&#10095;</button>
+                        <h3>RGB Keyboard</h3>
+                        <p>$129</p>
                     </div>
-                    <h3>Gaming Mouse</h3>
-                    <p>$79</p>
-                </div>
 
-                <div class="product-card">
-                    <div class="product-gallery">
-                        <div class="slides">
-                            <img src="mouse side.jpg" alt="Laptop front">
-                            <img src="mouse top.png" alt="Laptop side">
-                            <img src="mouse side.jpg" alt="Laptop back">
+                    <div class="product-card">
+                        <div class="product-gallery">
+                            <div class="slides">
+                                <img src="keyboard-removebg-preview.png" alt="Laptop front">
+                                <img src="keyboard-removebg-preview.png" alt="Laptop side">
+                                <img src="keyboard-removebg-preview.png" alt="Laptop back">
+                            </div>
+                            <button class="prev">&#10094;</button>
+                            <button class="next">&#10095;</button>
                         </div>
-                        <button class="prev">&#10094;</button>
-                        <button class="next">&#10095;</button>
+                        <h3>RGB Keyboard</h3>
+                        <p>$129</p>
                     </div>
-                    <h3>Gaming Mouse</h3>
-                    <p>$79</p>
-                </div>
-
-                <div class="product-card">
-                    <div class="product-gallery">
-                        <div class="slides">
-                            <img src="mouse side.jpg" alt="Laptop front">
-                            <img src="mouse top.png" alt="Laptop side">
-                            <img src="mouse side.jpg" alt="Laptop back">
+                    
+                    <div class="product-card">
+                        <div class="product-gallery">
+                            <div class="slides">
+                                <img src="keyboard-removebg-preview.png" alt="Laptop front">
+                                <img src="keyboard-removebg-preview.png" alt="Laptop side">
+                                <img src="keyboard-removebg-preview.png" alt="Laptop back">
+                            </div>
+                            <button class="prev">&#10094;</button>
+                            <button class="next">&#10095;</button>
                         </div>
-                        <button class="prev">&#10094;</button>
-                        <button class="next">&#10095;</button>
+                        <h3>RGB Keyboard</h3>
+                        <p>$129</p>
                     </div>
-                    <h3>Gaming Mouse</h3>
-                    <p>$79</p>
-                </div>
 
-                <div class="product-card">
-                    <div class="product-gallery">
-                        <div class="slides">
-                            <img src="mouse side.jpg" alt="Laptop front">
-                            <img src="mouse top.png" alt="Laptop side">
-                            <img src="mouse side.jpg" alt="Laptop back">
+                    <div class="product-card">
+                        <div class="product-gallery">
+                            <div class="slides">
+                                <img src="keyboard-removebg-preview.png" alt="Laptop front">
+                                <img src="keyboard-removebg-preview.png" alt="Laptop side">
+                                <img src="keyboard-removebg-preview.png" alt="Laptop back">
+                            </div>
+                            <button class="prev">&#10094;</button>
+                            <button class="next">&#10095;</button>
                         </div>
-                        <button class="prev">&#10094;</button>
-                        <button class="next">&#10095;</button>
+                        <h3>RGB Keyboard</h3>
+                        <p>$129</p>
                     </div>
-                    <h3>Gaming Mouse</h3>
-                    <p>$79</p>
-                </div>
 
+                </div>
             </div>
-        </div>
 
 
-        <div id="monitors" class="category">
-            <div class="product-grid">
+            <div id="mice" class="category">
+                <div class="product-grid">
 
-                <div class="product-card">
-                    <div class="product-gallery">
-                        <div class="slides">
-                            <img src="monitor1-removebg-preview.png" alt="Laptop front">
-                            <img src="monitor_2-removebg-preview.png" alt="Laptop side">
-                            <img src="monitor_3-removebg-preview.png" alt="Laptop back">
+                    <div class="product-card">
+                        <div class="product-gallery">
+                            <div class="slides">
+                                <img src="mouse side.jpg" alt="Laptop front">
+                                <img src="mouse top.png" alt="Laptop side">
+                                <img src="mouse side.jpg" alt="Laptop back">
+                            </div>
+                            <button class="prev">&#10094;</button>
+                            <button class="next">&#10095;</button>
                         </div>
-                        <button class="prev">&#10094;</button>
-                        <button class="next">&#10095;</button>
+                        <h3>Wireless Mouse</h3>
+                        <p>$49</p>
                     </div>
-                    <h3>4K Monitor</h3>
-                    <p>$299</p>
-                </div>
 
-                <div class="product-card">
-                    <div class="product-gallery">
-                        <div class="slides">
-                            <img src="monitor1-removebg-preview.png" alt="Laptop front">
-                            <img src="monitor_2-removebg-preview.png" alt="Laptop side">
-                            <img src="monitor_3-removebg-preview.png" alt="Laptop back">
+                    <div class="product-card">
+                        <div class="product-gallery">
+                            <div class="slides">
+                                <img src="mouse side.jpg" alt="Laptop front">
+                                <img src="mouse top.png" alt="Laptop side">
+                                <img src="mouse side.jpg" alt="Laptop back">
+                            </div>
+                            <button class="prev">&#10094;</button>
+                            <button class="next">&#10095;</button>
                         </div>
-                        <button class="prev">&#10094;</button>
-                        <button class="next">&#10095;</button>
+                        <h3>Gaming Mouse</h3>
+                        <p>$79</p>
                     </div>
-                    <h3>Ultrawide Monitor</h3>
-                    <p>$499</p>
-                </div>
 
-                <div class="product-card">
-                    <div class="product-gallery">
-                        <div class="slides">
-                            <img src="monitor1-removebg-preview.png" alt="Laptop front">
-                            <img src="monitor_2-removebg-preview.png" alt="Laptop side">
-                            <img src="monitor_3-removebg-preview.png" alt="Laptop back">
+                    <div class="product-card">
+                        <div class="product-gallery">
+                            <div class="slides">
+                                <img src="mouse side.jpg" alt="Laptop front">
+                                <img src="mouse top.png" alt="Laptop side">
+                                <img src="mouse side.jpg" alt="Laptop back">
+                            </div>
+                            <button class="prev">&#10094;</button>
+                            <button class="next">&#10095;</button>
                         </div>
-                        <button class="prev">&#10094;</button>
-                        <button class="next">&#10095;</button>
+                        <h3>Gaming Mouse</h3>
+                        <p>$79</p>
                     </div>
-                    <h3>Ultrawide Monitor</h3>
-                    <p>$499</p>
-                </div>
 
-                <div class="product-card">
-                    <div class="product-gallery">
-                        <div class="slides">
-                            <img src="monitor1-removebg-preview.png" alt="Laptop front">
-                            <img src="monitor_2-removebg-preview.png" alt="Laptop side">
-                            <img src="monitor_3-removebg-preview.png" alt="Laptop back">
+                    <div class="product-card">
+                        <div class="product-gallery">
+                            <div class="slides">
+                                <img src="mouse side.jpg" alt="Laptop front">
+                                <img src="mouse top.png" alt="Laptop side">
+                                <img src="mouse side.jpg" alt="Laptop back">
+                            </div>
+                            <button class="prev">&#10094;</button>
+                            <button class="next">&#10095;</button>
                         </div>
-                        <button class="prev">&#10094;</button>
-                        <button class="next">&#10095;</button>
+                        <h3>Gaming Mouse</h3>
+                        <p>$79</p>
                     </div>
-                    <h3>Ultrawide Monitor</h3>-card
-                    <p>$499</p>
-                </div>
 
-                <div class="product-card">
-                    <div class="product-gallery">
-                        <div class="slides">
-                            <img src="monitor1-removebg-preview.png" alt="Laptop front">
-                            <img src="monitor_2-removebg-preview.png" alt="Laptop side">
-                            <img src="monitor_3-removebg-preview.png" alt="Laptop back">
+                    <div class="product-card">
+                        <div class="product-gallery">
+                            <div class="slides">
+                                <img src="mouse side.jpg" alt="Laptop front">
+                                <img src="mouse top.png" alt="Laptop side">
+                                <img src="mouse side.jpg" alt="Laptop back">
+                            </div>
+                            <button class="prev">&#10094;</button>
+                            <button class="next">&#10095;</button>
                         </div>
-                        <button class="prev">&#10094;</button>
-                        <button class="next">&#10095;</button>
+                        <h3>Gaming Mouse</h3>
+                        <p>$79</p>
                     </div>
-                    <h3>Ultrawide Monitor</h3>
-                    <p>$499</p>
-                </div>
 
-                <div class="product-card">
-                    <div class="product-gallery">
-                        <div class="slides">
-                            <img src="monitor1-removebg-preview.png" alt="Laptop front">
-                            <img src="monitor_2-removebg-preview.png" alt="Laptop side">
-                            <img src="monitor_3-removebg-preview.png" alt="Laptop back">
+                    <div class="product-card">
+                        <div class="product-gallery">
+                            <div class="slides">
+                                <img src="mouse side.jpg" alt="Laptop front">
+                                <img src="mouse top.png" alt="Laptop side">
+                                <img src="mouse side.jpg" alt="Laptop back">
+                            </div>
+                            <button class="prev">&#10094;</button>
+                            <button class="next">&#10095;</button>
                         </div>
-                        <button class="prev">&#10094;</button>
-                        <button class="next">&#10095;</button>
+                        <h3>Gaming Mouse</h3>
+                        <p>$79</p>
                     </div>
-                    <h3>Ultrawide Monitor</h3>
-                    <p>$499</p>
-                </div>
 
+                </div>
             </div>
-        </div>
 
 
-        <div id="ram" class="category">
-            <div class="product-grid">
--card
-                <div class="product-card">
-                    <div class="product-gallery">
-                        <div class="slides">
-                            <img src="RAM_1-removebg-preview.png" alt="Laptop front">
-                            <img src="RAM_2-removebg-preview.png" alt="Laptop side">
-                            <img src="RAM_3-removebg-preview.png" alt="Laptop back">
+            <div id="monitors" class="category">
+                <div class="product-grid">
+
+                    <div class="product-card">
+                        <div class="product-gallery">
+                            <div class="slides">
+                                <img src="monitor1-removebg-preview.png" alt="Laptop front">
+                                <img src="monitor_2-removebg-preview.png" alt="Laptop side">
+                                <img src="monitor_3-removebg-preview.png" alt="Laptop back">
+                            </div>
+                            <button class="prev">&#10094;</button>
+                            <button class="next">&#10095;</button>
                         </div>
-                        <button class="prev">&#10094;</button>
-                        <button class="next">&#10095;</button>
+                        <h3>4K Monitor</h3>
+                        <p>$299</p>
                     </div>
-                    <h3>16GB DDR4 RAM</h3>
-                    <p>$79</p>
-                </div>
 
-                <div class="product-card">
-                    <div class="product-gallery">
-                        <div class="slides">
-                            <img src="RAM_1-removebg-preview.png" alt="Laptop front">
-                            <img src="RAM_2-removebg-preview.png" alt="Laptop side">
-                            <img src="RAM_3-removebg-preview.png" alt="Laptop back">
+                    <div class="product-card">
+                        <div class="product-gallery">
+                            <div class="slides">
+                                <img src="monitor1-removebg-preview.png" alt="Laptop front">
+                                <img src="monitor_2-removebg-preview.png" alt="Laptop side">
+                                <img src="monitor_3-removebg-preview.png" alt="Laptop back">
+                            </div>
+                            <button class="prev">&#10094;</button>
+                            <button class="next">&#10095;</button>
                         </div>
-                        <button class="prev">&#10094;</button>
-                        <button class="next">&#10095;</button>
+                        <h3>Ultrawide Monitor</h3>
+                        <p>$499</p>
                     </div>
-                    <h3>32GB DDR4 RAM</h3>
-                    <p>$149</p>
-                </div>
 
-                <div class="product-card">
-                    <div class="product-gallery">
-                        <div class="slides">
-                            <img src="RAM_1-removebg-preview.png" alt="Laptop front">
-                            <img src="RAM_2-removebg-preview.png" alt="Laptop side">
-                            <img src="RAM_3-removebg-preview.png" alt="Laptop back">
+                    <div class="product-card">
+                        <div class="product-gallery">
+                            <div class="slides">
+                                <img src="monitor1-removebg-preview.png" alt="Laptop front">
+                                <img src="monitor_2-removebg-preview.png" alt="Laptop side">
+                                <img src="monitor_3-removebg-preview.png" alt="Laptop back">
+                            </div>
+                            <button class="prev">&#10094;</button>
+                            <button class="next">&#10095;</button>
                         </div>
-                        <button class="prev">&#10094;</button>
-                        <button class="next">&#10095;</button>
+                        <h3>Ultrawide Monitor</h3>
+                        <p>$499</p>
                     </div>
-                    <h3>32GB DDR4 RAM</h3>
-                    <p>$149</p>
-                </div>
 
-                <div class="product-card">
-                    <div class="product-gallery">
-                        <div class="slides">
-                            <img src="RAM_1-removebg-preview.png" alt="Laptop front">
-                            <img src="RAM_2-removebg-preview.png" alt="Laptop side">
-                            <img src="RAM_3-removebg-preview.png" alt="Laptop back">
+                    <div class="product-card">
+                        <div class="product-gallery">
+                            <div class="slides">
+                                <img src="monitor1-removebg-preview.png" alt="Laptop front">
+                                <img src="monitor_2-removebg-preview.png" alt="Laptop side">
+                                <img src="monitor_3-removebg-preview.png" alt="Laptop back">
+                            </div>
+                            <button class="prev">&#10094;</button>
+                            <button class="next">&#10095;</button>
                         </div>
-                        <button class="prev">&#10094;</button>
-                        <button class="next">&#10095;</button>
+                        <h3>Ultrawide Monitor</h3>-card
+                        <p>$499</p>
                     </div>
-                    <h3>32GB DDR4 RAM</h3>
-                    <p>$149</p>
-                </div>
 
-                <div class="product-card">
-                    <div class="product-gallery">
-                        <div class="slides">
-                            <img src="RAM_1-removebg-preview.png" alt="Laptop front">
-                            <img src="RAM_2-removebg-preview.png" alt="Laptop side">
-                            <img src="RAM_3-removebg-preview.png" alt="Laptop back">
+                    <div class="product-card">
+                        <div class="product-gallery">
+                            <div class="slides">
+                                <img src="monitor1-removebg-preview.png" alt="Laptop front">
+                                <img src="monitor_2-removebg-preview.png" alt="Laptop side">
+                                <img src="monitor_3-removebg-preview.png" alt="Laptop back">
+                            </div>
+                            <button class="prev">&#10094;</button>
+                            <button class="next">&#10095;</button>
                         </div>
-                        <button class="prev">&#10094;</button>
-                        <button class="next">&#10095;</button>
+                        <h3>Ultrawide Monitor</h3>
+                        <p>$499</p>
                     </div>
-                    <h3>32GB DDR4 RAM</h3>-card
-                    <p>$149</p>
-                </div>
 
-                <div class="product-card">
-                    <div class="product-gallery">
-                        <div class="slides">
-                            <img src="RAM_1-removebg-preview.png" alt="Laptop front">
-                            <img src="RAM_2-removebg-preview.png" alt="Laptop side">
-                            <img src="RAM_3-removebg-preview.png" alt="Laptop back">
+                    <div class="product-card">
+                        <div class="product-gallery">
+                            <div class="slides">
+                                <img src="monitor1-removebg-preview.png" alt="Laptop front">
+                                <img src="monitor_2-removebg-preview.png" alt="Laptop side">
+                                <img src="monitor_3-removebg-preview.png" alt="Laptop back">
+                            </div>
+                            <button class="prev">&#10094;</button>
+                            <button class="next">&#10095;</button>
                         </div>
-                        <button class="prev">&#10094;</button>
-                        <button class="next">&#10095;</button>
+                        <h3>Ultrawide Monitor</h3>
+                        <p>$499</p>
                     </div>
-                    <h3>32GB DDR4 RAM</h3>
-                    <p>$149</p>
-                </div>
 
+                </div>
             </div>
-        </div>
 
 
-        <div id="cpu" class="category">
-            <div class="product-grid">
-                <div class="product-card">
-                    <div class="product-gallery">
-                        <div class="slides">
-                            <img src="CPU_1-removebg-preview.png" alt="Laptop front">
-                            <img src="CPU_2-removebg-preview.png" alt="Laptop side">
-                            <img src="CPU_3-removebg-preview.png" alt="Laptop back">
+            <div id="ram" class="category">
+                <div class="product-grid">
+    -card
+                    <div class="product-card">
+                        <div class="product-gallery">
+                            <div class="slides">
+                                <img src="RAM_1-removebg-preview.png" alt="Laptop front">
+                                <img src="RAM_2-removebg-preview.png" alt="Laptop side">
+                                <img src="RAM_3-removebg-preview.png" alt="Laptop back">
+                            </div>
+                            <button class="prev">&#10094;</button>
+                            <button class="next">&#10095;</button>
                         </div>
-                        <button class="prev">&#10094;</button>
-                        <button class="next">&#10095;</button>
+                        <h3>16GB DDR4 RAM</h3>
+                        <p>$79</p>
                     </div>
-                    <h3>Intel core Ultra</h3>
-                    <p>$499</p>
-                </div>
 
-                <div class="product-card">
-                    <div class="product-gallery">
-                        <div class="slides">
-                            <img src="CPU_1-removebg-preview.png" alt="Laptop front">
-                            <img src="CPU_2-removebg-preview.png" alt="Laptop side">
-                            <img src="CPU_3-removebg-preview.png" alt="Laptop back">
+                    <div class="product-card">
+                        <div class="product-gallery">
+                            <div class="slides">
+                                <img src="RAM_1-removebg-preview.png" alt="Laptop front">
+                                <img src="RAM_2-removebg-preview.png" alt="Laptop side">
+                                <img src="RAM_3-removebg-preview.png" alt="Laptop back">
+                            </div>
+                            <button class="prev">&#10094;</button>
+                            <button class="next">&#10095;</button>
                         </div>
-                        <button class="prev">&#10094;</button>
-                        <button class="next">&#10095;</button>
+                        <h3>32GB DDR4 RAM</h3>
+                        <p>$149</p>
                     </div>
-                    <h3>Intel core Ultra</h3>
-                    <p>$499</p>
-                </div>
 
-                <div class="product-card">
-                    <div class="product-gallery">
-                        <div class="slides">
-                            <img src="CPU_1-removebg-preview.png" alt="Laptop front">
-                            <img src="CPU_2-removebg-preview.png" alt="Laptop side">
-                            <img src="CPU_3-removebg-preview.png" alt="Laptop back">
+                    <div class="product-card">
+                        <div class="product-gallery">
+                            <div class="slides">
+                                <img src="RAM_1-removebg-preview.png" alt="Laptop front">
+                                <img src="RAM_2-removebg-preview.png" alt="Laptop side">
+                                <img src="RAM_3-removebg-preview.png" alt="Laptop back">
+                            </div>
+                            <button class="prev">&#10094;</button>
+                            <button class="next">&#10095;</button>
                         </div>
-                        <button class="prev">&#10094;</button>
-                        <button class="next">&#10095;</button>
+                        <h3>32GB DDR4 RAM</h3>
+                        <p>$149</p>
                     </div>
-                    <h3>Intel core Ultra</h3>-card
-                    <p>$499</p>
-                </div>
 
-                <div class="product-card">
-                    <div class="product-gallery">
-                        <div class="slides">
-                            <img src="CPU_1-removebg-preview.png" alt="Laptop front">
-                            <img src="CPU_2-removebg-preview.png" alt="Laptop side">
-                            <img src="CPU_3-removebg-preview.png" alt="Laptop back">
+                    <div class="product-card">
+                        <div class="product-gallery">
+                            <div class="slides">
+                                <img src="RAM_1-removebg-preview.png" alt="Laptop front">
+                                <img src="RAM_2-removebg-preview.png" alt="Laptop side">
+                                <img src="RAM_3-removebg-preview.png" alt="Laptop back">
+                            </div>
+                            <button class="prev">&#10094;</button>
+                            <button class="next">&#10095;</button>
                         </div>
-                        <button class="prev">&#10094;</button>
-                        <button class="next">&#10095;</button>
+                        <h3>32GB DDR4 RAM</h3>
+                        <p>$149</p>
                     </div>
-                    <h3>Intel core Ultra</h3>
-                    <p>$499</p>
-                </div>
 
-                <div class="product-card">
-                    <div class="product-gallery">
-                        <div class="slides">
-                            <img src="CPU_1-removebg-preview.png" alt="Laptop front">
-                            <img src="CPU_2-removebg-preview.png" alt="Laptop side">
-                            <img src="CPU_3-removebg-preview.png" alt="Laptop back">
+                    <div class="product-card">
+                        <div class="product-gallery">
+                            <div class="slides">
+                                <img src="RAM_1-removebg-preview.png" alt="Laptop front">
+                                <img src="RAM_2-removebg-preview.png" alt="Laptop side">
+                                <img src="RAM_3-removebg-preview.png" alt="Laptop back">
+                            </div>
+                            <button class="prev">&#10094;</button>
+                            <button class="next">&#10095;</button>
                         </div>
-                        <button class="prev">&#10094;</button>
-                        <button class="next">&#10095;</button>
+                        <h3>32GB DDR4 RAM</h3>-card
+                        <p>$149</p>
                     </div>
-                    <h3>Intel core Ultra</h3>
-                    <p>$499</p>
-                </div>
 
-                <div class="product-card">
-                    <div class="product-gallery">
-                        <div class="slides">
-                            <img src="CPU_1-removebg-preview.png" alt="Laptop front">
-                            <img src="CPU_2-removebg-preview.png" alt="Laptop side">
-                            <img src="CPU_3-removebg-preview.png" alt="Laptop back">
+                    <div class="product-card">
+                        <div class="product-gallery">
+                            <div class="slides">
+                                <img src="RAM_1-removebg-preview.png" alt="Laptop front">
+                                <img src="RAM_2-removebg-preview.png" alt="Laptop side">
+                                <img src="RAM_3-removebg-preview.png" alt="Laptop back">
+                            </div>
+                            <button class="prev">&#10094;</button>
+                            <button class="next">&#10095;</button>
                         </div>
-                        <button class="prev">&#10094;</button>
-                        <button class="next">&#10095;</button>
+                        <h3>32GB DDR4 RAM</h3>
+                        <p>$149</p>
                     </div>
-                    <h3>Intel core Ultra</h3>
-                    <p>$499</p>
-                </div>
 
+                </div>
             </div>
-        </div>
 
 
-        <div id="storage" class="category">
-            <div class="product-grid">
-                <div class="product-card">
-                    <div class="product-gallery">
-                        <div class="slides">
-                            <img src="SSD 1.jpg" alt="Laptop front">
-                            <img src="SSD 2.jpg" alt="Laptop side">
-                            <img src="SSD 3.jpg" alt="Laptop back">
-                        </div>-card
-                        <button class="prev">&#10094;</button>
-                        <button class="next">&#10095;</button>
-                    </div>
-                    <h3>2TB NVMe SSD</h3>
-                    <p>$129</p>
-                </div>
-
-                <div class="product-card">
-                    <div class="product-gallery">
-                        <div class="slides">
-                            <img src="SSD 1.jpg" alt="Laptop front">
-                            <img src="SSD 2.jpg" alt="Laptop side">
-                            <img src="SSD 3.jpg" alt="Laptop back">
+            <div id="cpu" class="category">
+                <div class="product-grid">
+                    <div class="product-card">
+                        <div class="product-gallery">
+                            <div class="slides">
+                                <img src="CPU_1-removebg-preview.png" alt="Laptop front">
+                                <img src="CPU_2-removebg-preview.png" alt="Laptop side">
+                                <img src="CPU_3-removebg-preview.png" alt="Laptop back">
+                            </div>
+                            <button class="prev">&#10094;</button>
+                            <button class="next">&#10095;</button>
                         </div>
-                        <button class="prev">&#10094;</button>
-                        <button class="next">&#10095;</button>
+                        <h3>Intel core Ultra</h3>
+                        <p>$499</p>
                     </div>
-                    <h3>2TB NVMe SSD</h3>
-                    <p>$89</p>
-                </div>
 
-                <div class="product-card">
-                    <div class="product-gallery">
-                        <div class="slides">
-                            <img src="SSD 1.jpg" alt="Laptop front">
-                            <img src="SSD 2.jpg" alt="Laptop side">
-                            <img src="SSD 3.jpg" alt="Laptop back">
+                    <div class="product-card">
+                        <div class="product-gallery">
+                            <div class="slides">
+                                <img src="CPU_1-removebg-preview.png" alt="Laptop front">
+                                <img src="CPU_2-removebg-preview.png" alt="Laptop side">
+                                <img src="CPU_3-removebg-preview.png" alt="Laptop back">
+                            </div>
+                            <button class="prev">&#10094;</button>
+                            <button class="next">&#10095;</button>
                         </div>
-                        <button class="prev">&#10094;</button>
-                        <button class="next">&#10095;</button>
+                        <h3>Intel core Ultra</h3>
+                        <p>$499</p>
                     </div>
-                    <h3>2TB NVMe SSD</h3>
-                    <p>$89</p>
-                </div>
 
-                <div class="product-card">
-                    <div class="product-gallery">
-                        <div class="slides">
-                            <img src="SSD 1.jpg" alt="Laptop front">
-                            <img src="SSD 2.jpg" alt="Laptop side">
-                            <img src="SSD 3.jpg" alt="Laptop back">
+                    <div class="product-card">
+                        <div class="product-gallery">
+                            <div class="slides">
+                                <img src="CPU_1-removebg-preview.png" alt="Laptop front">
+                                <img src="CPU_2-removebg-preview.png" alt="Laptop side">
+                                <img src="CPU_3-removebg-preview.png" alt="Laptop back">
+                            </div>
+                            <button class="prev">&#10094;</button>
+                            <button class="next">&#10095;</button>
                         </div>
-                        <button class="prev">&#10094;</button>
-                        <button class="next">&#10095;</button>
+                        <h3>Intel core Ultra</h3>-card
+                        <p>$499</p>
                     </div>
-                    <h3>2TB NVMe SSD</h3>
-                    <p>$89</p>
-                </div>-card
 
-                <div class="product-card">
-                    <div class="product-gallery">
-                        <div class="slides">
-                            <img src="SSD 1.jpg" alt="Laptop front">
-                            <img src="SSD 2.jpg" alt="Laptop side">
-                            <img src="SSD 3.jpg" alt="Laptop back">
+                    <div class="product-card">
+                        <div class="product-gallery">
+                            <div class="slides">
+                                <img src="CPU_1-removebg-preview.png" alt="Laptop front">
+                                <img src="CPU_2-removebg-preview.png" alt="Laptop side">
+                                <img src="CPU_3-removebg-preview.png" alt="Laptop back">
+                            </div>
+                            <button class="prev">&#10094;</button>
+                            <button class="next">&#10095;</button>
                         </div>
-                        <button class="prev">&#10094;</button>
-                        <button class="next">&#10095;</button>
+                        <h3>Intel core Ultra</h3>
+                        <p>$499</p>
                     </div>
-                    <h3>2TB NVMe SSD</h3>
-                    <p>$89</p>
-                </div>
 
-                <div class="product-card">
-                    <div class="product-gallery">
-                        <div class="slides">
-                            <img src="SSD 1.jpg" alt="Laptop front">
-                            <img src="SSD 2.jpg" alt="Laptop side">
-                            <img src="SSD 3.jpg" alt="Laptop back">
+                    <div class="product-card">
+                        <div class="product-gallery">
+                            <div class="slides">
+                                <img src="CPU_1-removebg-preview.png" alt="Laptop front">
+                                <img src="CPU_2-removebg-preview.png" alt="Laptop side">
+                                <img src="CPU_3-removebg-preview.png" alt="Laptop back">
+                            </div>
+                            <button class="prev">&#10094;</button>
+                            <button class="next">&#10095;</button>
                         </div>
-                        <button class="prev">&#10094;</button>
-                        <button class="next">&#10095;</button>
+                        <h3>Intel core Ultra</h3>
+                        <p>$499</p>
                     </div>
-                    <h3>2TB NVMe SSD</h3>
-                    <p>$89</p>
+
+                    <div class="product-card">
+                        <div class="product-gallery">
+                            <div class="slides">
+                                <img src="CPU_1-removebg-preview.png" alt="Laptop front">
+                                <img src="CPU_2-removebg-preview.png" alt="Laptop side">
+                                <img src="CPU_3-removebg-preview.png" alt="Laptop back">
+                            </div>
+                            <button class="prev">&#10094;</button>
+                            <button class="next">&#10095;</button>
+                        </div>
+                        <h3>Intel core Ultra</h3>
+                        <p>$499</p>
+                    </div>
+
                 </div>
-                
             </div>
-        </div>
 
 
-        <div id="motherboards" class="category">
-            <div class="product-grid">
-                <div class="product-card">
-                    <div class="product-gallery">
-                        <div class="slides">
-                            <img src="Mother_board-removebg-preview.png" alt="Laptop front">
-                            <img src="Mother_board_2-removebg-preview.png" alt="Laptop side">
-                            <img src="Mother_board_3-removebg-preview.png" alt="Laptop back">
+            <div id="storage" class="category">
+                <div class="product-grid">
+                    <div class="product-card">
+                        <div class="product-gallery">
+                            <div class="slides">
+                                <img src="SSD 1.jpg" alt="Laptop front">
+                                <img src="SSD 2.jpg" alt="Laptop side">
+                                <img src="SSD 3.jpg" alt="Laptop back">
+                            </div>-card
+                            <button class="prev">&#10094;</button>
+                            <button class="next">&#10095;</button>
                         </div>
-                        <button class="prev">&#10094;</button>
-                        <button class="next">&#10095;</button>
+                        <h3>2TB NVMe SSD</h3>
+                        <p>$129</p>
                     </div>
-                    <h3>ATX Motherboard</h3>
-                    <p>$199</p>
-                </div>
 
-                <div class="product-card">
-                    <div class="product-gallery">
-                        <div class="slides">
-                            <img src="Mother_board-removebg-preview.png" alt="Laptop front">
-                            <img src="Mother_board_2-removebg-preview.png" alt="Laptop side">
-                            <img src="Mother_board_3-removebg-preview.png" alt="Laptop back">
+                    <div class="product-card">
+                        <div class="product-gallery">
+                            <div class="slides">
+                                <img src="SSD 1.jpg" alt="Laptop front">
+                                <img src="SSD 2.jpg" alt="Laptop side">
+                                <img src="SSD 3.jpg" alt="Laptop back">
+                            </div>
+                            <button class="prev">&#10094;</button>
+                            <button class="next">&#10095;</button>
                         </div>
-                        <button class="prev">&#10094;</button>
-                        <button class="next">&#10095;</button>
+                        <h3>2TB NVMe SSD</h3>
+                        <p>$89</p>
                     </div>
-                    <h3>Micro ATX Motherboard</h3>
-                    <p>$149</p>
-                </div>
 
-                <div class="product-card">
-                    <div class="product-gallery">
-                        <div class="slides">
-                            <img src="Mother_board-removebg-preview.png" alt="Laptop front">
-                            <img src="Mother_board_2-removebg-preview.png" alt="Laptop side">
-                            <img src="Mother_board_3-removebg-preview.png" alt="Laptop back">
+                    <div class="product-card">
+                        <div class="product-gallery">
+                            <div class="slides">
+                                <img src="SSD 1.jpg" alt="Laptop front">
+                                <img src="SSD 2.jpg" alt="Laptop side">
+                                <img src="SSD 3.jpg" alt="Laptop back">
+                            </div>
+                            <button class="prev">&#10094;</button>
+                            <button class="next">&#10095;</button>
                         </div>
-                        <button class="prev">&#10094;</button>
-                        <button class="next">&#10095;</button>
+                        <h3>2TB NVMe SSD</h3>
+                        <p>$89</p>
                     </div>
-                    <h3>Micro ATX Motherboard</h3>
-                    <p>$149</p>
-                </div>
 
-                <div class="product-card">
-                    <div class="product-gallery">
-                        <div class="slides">
-                            <img src="Mother_board-removebg-preview.png" alt="Laptop front">
-                            <img src="Mother_board_2-removebg-preview.png" alt="Laptop side">
-                            <img src="Mother_board_3-removebg-preview.png" alt="Laptop back">
+                    <div class="product-card">
+                        <div class="product-gallery">
+                            <div class="slides">
+                                <img src="SSD 1.jpg" alt="Laptop front">
+                                <img src="SSD 2.jpg" alt="Laptop side">
+                                <img src="SSD 3.jpg" alt="Laptop back">
+                            </div>
+                            <button class="prev">&#10094;</button>
+                            <button class="next">&#10095;</button>
                         </div>
-                        <button class="prev">&#10094;</button>
-                        <button class="next">&#10095;</button>
-                    </div>
-                    <h3>Micro ATX Motherboard</h3>
-                    <p>$149</p>
-                </div>
+                        <h3>2TB NVMe SSD</h3>
+                        <p>$89</p>
+                    </div>-card
 
-                <div class="product-card">
-                    <div class="product-gallery">
-                        <div class="slides">
-                            <img src="Mother_board-removebg-preview.png" alt="Laptop front">
-                            <img src="Mother_board_2-removebg-preview.png" alt="Laptop side">
-                            <img src="Mother_board_3-removebg-preview.png" alt="Laptop back">
+                    <div class="product-card">
+                        <div class="product-gallery">
+                            <div class="slides">
+                                <img src="SSD 1.jpg" alt="Laptop front">
+                                <img src="SSD 2.jpg" alt="Laptop side">
+                                <img src="SSD 3.jpg" alt="Laptop back">
+                            </div>
+                            <button class="prev">&#10094;</button>
+                            <button class="next">&#10095;</button>
                         </div>
-                        <button class="prev">&#10094;</button>
-                        <button class="next">&#10095;</button>
+                        <h3>2TB NVMe SSD</h3>
+                        <p>$89</p>
                     </div>
-                    <h3>Micro ATX Motherboard</h3>
-                    <p>$149</p>
-                </div>
 
-                <div class="product-card">
-                    <div class="product-gallery">
-                        <div class="slides">
-                            <img src="Mother_board-removebg-preview.png" alt="Laptop front">
-                            <img src="Mother_board_2-removebg-preview.png" alt="Laptop side">
-                            <img src="Mother_board_3-removebg-preview.png" alt="Laptop back">
+                    <div class="product-card">
+                        <div class="product-gallery">
+                            <div class="slides">
+                                <img src="SSD 1.jpg" alt="Laptop front">
+                                <img src="SSD 2.jpg" alt="Laptop side">
+                                <img src="SSD 3.jpg" alt="Laptop back">
+                            </div>
+                            <button class="prev">&#10094;</button>
+                            <button class="next">&#10095;</button>
                         </div>
-                        <button class="prev">&#10094;</button>
-                        <button class="next">&#10095;</button>
+                        <h3>2TB NVMe SSD</h3>
+                        <p>$89</p>
                     </div>
-                    <h3>Micro ATX Motherboard</h3>
-                    <p>$149</p>
+                    
                 </div>
-
             </div>
-        </div>
-    </section>
 
 
-    <section id="services">
-        <h2>Our Services</h2>
-        <div class="service-list">
-            <div class="service">
-                <h3>Computer Repair</h3>
-                <p>Fast and reliable repair services for all computer brands.</p>
+            <div id="motherboards" class="category">
+                <div class="product-grid">
+                    <div class="product-card">
+                        <div class="product-gallery">
+                            <div class="slides">
+                                <img src="Mother_board-removebg-preview.png" alt="Laptop front">
+                                <img src="Mother_board_2-removebg-preview.png" alt="Laptop side">
+                                <img src="Mother_board_3-removebg-preview.png" alt="Laptop back">
+                            </div>
+                            <button class="prev">&#10094;</button>
+                            <button class="next">&#10095;</button>
+                        </div>
+                        <h3>ATX Motherboard</h3>
+                        <p>$199</p>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-gallery">
+                            <div class="slides">
+                                <img src="Mother_board-removebg-preview.png" alt="Laptop front">
+                                <img src="Mother_board_2-removebg-preview.png" alt="Laptop side">
+                                <img src="Mother_board_3-removebg-preview.png" alt="Laptop back">
+                            </div>
+                            <button class="prev">&#10094;</button>
+                            <button class="next">&#10095;</button>
+                        </div>
+                        <h3>Micro ATX Motherboard</h3>
+                        <p>$149</p>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-gallery">
+                            <div class="slides">
+                                <img src="Mother_board-removebg-preview.png" alt="Laptop front">
+                                <img src="Mother_board_2-removebg-preview.png" alt="Laptop side">
+                                <img src="Mother_board_3-removebg-preview.png" alt="Laptop back">
+                            </div>
+                            <button class="prev">&#10094;</button>
+                            <button class="next">&#10095;</button>
+                        </div>
+                        <h3>Micro ATX Motherboard</h3>
+                        <p>$149</p>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-gallery">
+                            <div class="slides">
+                                <img src="Mother_board-removebg-preview.png" alt="Laptop front">
+                                <img src="Mother_board_2-removebg-preview.png" alt="Laptop side">
+                                <img src="Mother_board_3-removebg-preview.png" alt="Laptop back">
+                            </div>
+                            <button class="prev">&#10094;</button>
+                            <button class="next">&#10095;</button>
+                        </div>
+                        <h3>Micro ATX Motherboard</h3>
+                        <p>$149</p>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-gallery">
+                            <div class="slides">
+                                <img src="Mother_board-removebg-preview.png" alt="Laptop front">
+                                <img src="Mother_board_2-removebg-preview.png" alt="Laptop side">
+                                <img src="Mother_board_3-removebg-preview.png" alt="Laptop back">
+                            </div>
+                            <button class="prev">&#10094;</button>
+                            <button class="next">&#10095;</button>
+                        </div>
+                        <h3>Micro ATX Motherboard</h3>
+                        <p>$149</p>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-gallery">
+                            <div class="slides">
+                                <img src="Mother_board-removebg-preview.png" alt="Laptop front">
+                                <img src="Mother_board_2-removebg-preview.png" alt="Laptop side">
+                                <img src="Mother_board_3-removebg-preview.png" alt="Laptop back">
+                            </div>
+                            <button class="prev">&#10094;</button>
+                            <button class="next">&#10095;</button>
+                        </div>
+                        <h3>Micro ATX Motherboard</h3>
+                        <p>$149</p>
+                    </div>
+
+                </div>
             </div>
-            <div class="service">
-                <h3>Custom PC Builds</h3>
-                <p>Create your dream PC with our expert assembly team.</p>
+        </section>
+
+
+        <section id="services">
+            <h2>Our Services</h2>
+            <div class="service-list">
+                <div class="service">
+                    <h3>Computer Repair</h3>
+                    <p>Fast and reliable repair services for all computer brands.</p>
+                </div>
+                <div class="service">
+                    <h3>Custom PC Builds</h3>
+                    <p>Create your dream PC with our expert assembly team.</p>
+                </div>
+                <div class="service">
+                    <h3>Software Solutions</h3>
+                    <p>Professional installation and optimization of software.</p>
+                </div>
+                <div class="service">
+                    <h3>Data Recovery</h3>
+                    <p>Recover lost data from damaged or corrupted drives.</p>
+                </div>
             </div>
-            <div class="service">
-                <h3>Software Solutions</h3>
-                <p>Professional installation and optimization of software.</p>
-            </div>
-            <div class="service">
-                <h3>Data Recovery</h3>
-                <p>Recover lost data from damaged or corrupted drives.</p>
-            </div>
-        </div>
-    </section>
+        </section>
 
 
-    <section id="about">
-        <h2>About Us</h2>
-        <p>At TechHub, we are passionate about technology. With over a decade of experience, we provide high-quality products and exceptional services to meet all your computing needs. Our team is dedicated to ensuring customer satisfaction with expert advice and reliable support.</p>
-    </section>
+        <section id="about">
+            <h2>About Us</h2>
+            <p>At TechHub, we are passionate about technology. With over a decade of experience, we provide high-quality products and exceptional services to meet all your computing needs. Our team is dedicated to ensuring customer satisfaction with expert advice and reliable support.</p>
+        </section>
 
 
-    <section id="contact">
-        <h2>Contact Us</h2>
-        <form>
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required>
+        <section id="contact">
+            <h2>Contact Us</h2>
+            <form>
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
 
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
 
-            <label for="message">Message:</label>
-            <textarea id="message" name="message" rows="5" required></textarea>
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" rows="5" required></textarea>
 
-            <button type="submit">Send Message</button>
-        </form>
-    </section>
+                <button type="submit">Send Message</button>
+            </form>
+        </section>
 
 
-    <footer>
-        <p>&copy; 2025 CyberTool Computer Shop. All rights reserved.</p>
-    </footer>
+        <footer>
+            <p>&copy; 2025 CyberTool Computer Shop. All rights reserved.</p>
+        </footer>
 
-    
-    <script>
-        document.querySelectorAll('.product-gallery').forEach(gallery => {
-        const slides = gallery.querySelector('.slides');
-        const images = slides.querySelectorAll('img');
-        const prevBtn = gallery.querySelector('.prev');
-        const nextBtn = gallery.querySelector('.next');
-        let index = 0;
+        
+        <script>
+            document.querySelectorAll('.product-gallery').forEach(gallery => {
+            const slides = gallery.querySelector('.slides');
+            const images = slides.querySelectorAll('img');
+            const prevBtn = gallery.querySelector('.prev');
+            const nextBtn = gallery.querySelector('.next');
+            let index = 0;
 
-        function showSlide(i) {
-            index = (i + images.length) % images.length;
-            slides.style.transform = `translateX(${-index * 100}%)`;
-        }
+            function showSlide(i) {
+                index = (i + images.length) % images.length;
+                slides.style.transform = `translateX(${-index * 100}%)`;
+            }
 
-        prevBtn.addEventListener('click', () => showSlide(index - 1));
-        nextBtn.addEventListener('click', () => showSlide(index + 1));
+            prevBtn.addEventListener('click', () => showSlide(index - 1));
+            nextBtn.addEventListener('click', () => showSlide(index + 1));
 
-        // Optional: auto-slide every 4 seconds
-        setInterval(() => showSlide(index + 1), 4000);
-    });
-    </script>
+            // Optional: auto-slide every 4 seconds
+            setInterval(() => showSlide(index + 1), 4000);
+        });
+        </script>
 
-</body>
+    </body>
 </html>
